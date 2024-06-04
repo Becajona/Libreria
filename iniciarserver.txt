@@ -1,0 +1,16 @@
+cd LIBROS
+node server.js
+
+------Depedencia de mysql
+
+npm install express body-parser mysql2
+
+
+---Pasos 
+-Apagar el MySQL80 en el admin de tareas
+-Encender mysql y Apache en XAMPP
+
+-Localizar la carpeta con el comando linea 1
+-Abrir consola y encender el servidor con el codigo linea 2
+
+-Abrir el navegador con la direccion localhost:3006

@@ -4,15 +4,15 @@ const mysql = require('mysql2');
 const path = require('path');
 
 const app = express();
-const port = 3004;
+const port = 3006; 
 
-//analiza cuerpos de solicitudes JSON
+// Analizar cuerpos de solicitudes JSON
 app.use(bodyParser.json());
 
-// servir archivos estáticos desde la carpeta 'public'
+// Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta para servir el archivo HTML (parar su ejecucion )
+// Ruta para servir el archivo HTML (parar su ejecución)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -26,8 +26,8 @@ app.listen(port, () => {
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: ' ', //
-  database: 'libreria' // la base de datos 
+  password: '', // Asegúrate de que aquí pones tu contraseña
+  database: 'libreria'
 });
 
 db.connect(err => {

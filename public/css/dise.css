@@ -1,71 +1,101 @@
 /* Estilos generales */
 body {
-    margin: 0;
-    padding: 0;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color:#000000;
   
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Estilos de encabezados */
-  h1, h2 {
-    color: #333;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  h2 {
-    margin-top: 30px;
-  }
-  
-  /* Estilos de formularios */
-  form {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos de lista de libros */
-  #books-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  #books-list li {
-    margin-bottom: 10px;
-  }
-  
-  /* Estilos de scripts */
-  /* Puedes dejar esta parte en blanco si no tienes estilos específicos para JavaScript */
-  
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #ff0000;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+/*LISTA DE LIBROS inicio*/
+#books-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto; /* Ajusta el margen superior e inferior a tu preferencia */
+  width: 500px;
+  text-align: center;
+}
+
+
+#books-list li {
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+/*LISTA DE LIBROS FIN*/
+
+/* Estilos de formularios */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  background-color: #000000;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/*INICIO DE BOTON Y ANIMACION */
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #000000;
+  color: #ff0000;
+  border: none;
+  border-radius: 5px;
+  cursor: crosshair;
+  font-size: 16px;
+  border: 2px solid white;
+  transition: background-color .7s ease, color .7s ease, border .7s ease; /* Transición suave para cambios de color y borde */
+}
+
+button[type="submit"]:hover {
+  background-color: #ff0000;
+  color: rgb(255, 255, 255);
+  border: 4px solid #000000;
+}
+
+button[type="submit"]:not(:hover) {
+  transition: background-color .7s ease, color .7s ease, border .7s ease; /* Transición suave para cambios de color y borde */
+}
