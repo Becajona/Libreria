@@ -231,3 +231,34 @@ app.delete('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
     res.send({ message: 'Entrada eliminada exitosamente' });
   });
 });
+
+
+
+
+// Insertar autores
+app.post('/api/autores', (req, res) => {
+  const { Nombre, Apellido } = req.body;
+  const query = 'INSERT INTO Autores (Nombre, Apellido) VALUES (?, ?)';
+  db.query(query, [Nombre, Apellido], (err, results) => {
+      if (err) {
+          console.error('Error al insertar autor:', err);
+          res.status(500).send('Error al insertar autor en la base de datos');
+          return;
+      }
+      res.status(201).send({ id: results.insertId });
+  });
+});
+
+// Ruta para obtener todos los autores
+app.get('/api/autores', (req, res) => {
+  db.query('SELECT * FROM Autores', (err, results) => {
+      if (err) {
+          console.error('Error al obtener autores:', err);
+          res.status(500).send('Error al obtener autores de la base de datos');
+          return;
+      }
+      res.send(results);
+  });
+});
+
+
