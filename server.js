@@ -284,3 +284,41 @@ app.get('/api/autores', (req, res) => {
 });
 
 
+
+// Endpoint para obtener los detalles de préstamos
+app.get('/api/prestamos', (req, res) => {
+  const query = `
+    SELECT 
+      p.PrestamoID, 
+      CONCAT(m.Nombre, ' ', m.Apellido) AS Miembro,
+      l.Titulo AS Libro,
+      p.FechaPrestamo,
+      p.FechaDevolucion,
+      p.Estado
+    FROM Prestamos p
+    JOIN Miembros m ON p.MiembroID = m.MiembroID
+    LEFT JOIN Libros l ON p.LibroID = l.LibroID
+  `;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching data from the database:', err);
+      res.status(500).send('Error fetching data from the database');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Endpoint para insertar nuevos préstamos
+app.post('/api/loans', (req, res) => {
+  const { MiembroID, LibroID, FechaPrestamo, FechaDevolucion, Estado } = req.body;
+  const query = 'INSERT INTO Prestamos (MiembroID, LibroID, FechaPrestamo, FechaDevolucion, Estado) VALUES (?, ?, ?, ?, ?)';
+  db.query(query, [MiembroID, LibroID, FechaPrestamo, FechaDevolucion, Estado], (err, results) => {
+    if (err) {
+      console.error('Error inserting data into the database:', err);
+      res.status(500).send('Error inserting data into the database');
+      return;
+    }
+    res.status(201).send({ id: results.insertId });
+  });
+});
