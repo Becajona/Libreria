@@ -205,3 +205,11 @@ app.get('/api/editoriales', (req, res) => {
   });
 });
 
+
+// Ruta para obtener libroseditoriales
+app.get('/api/libroseditoriales', (req, res) => {
+  db.query('SELECT * FROM libroseditoriales', (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
