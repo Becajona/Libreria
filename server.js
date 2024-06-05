@@ -237,9 +237,9 @@ app.delete('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
 
 // Insertar autores
 app.post('/api/autores', (req, res) => {
-  const { Nombre, Apellido } = req.body;
-  const query = 'INSERT INTO Autores (Nombre, Apellido) VALUES (?, ?)';
-  db.query(query, [Nombre, Apellido], (err, results) => {
+  const { AutorID, Nombre, Apellido } = req.body;
+  const query = 'INSERT INTO Autores (AutorID, Nombre, Apellido) VALUES (?, ?, ?)';
+  db.query(query, [AutorID, Nombre, Apellido], (err, results) => {
       if (err) {
           console.error('Error al insertar autor:', err);
           res.status(500).send('Error al insertar autor en la base de datos');
