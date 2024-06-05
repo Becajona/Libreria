@@ -1,0 +1,46 @@
+/* Estilos generales del footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Estilos para la parte de arriba del footer */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    width: 45%;
+}
+
+.footer-column h3 {
+    color: #fff;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Estilos para la parte de abajo del footer */
+.footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+}

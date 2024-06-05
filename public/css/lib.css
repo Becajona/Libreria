@@ -1,0 +1,61 @@
+/* Estilos del carrusel de libros */
+.book-carousel {
+    position: relative;
+    max-width: 85%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.book-carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.book-slide {
+    min-width: 33.33%; /* Cambia este valor para ajustar cuántos libros se muestran a la vez */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.book-slide img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.book-info {
+    text-align: center;
+}
+
+.book-info h3 {
+    margin: 5px 0;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}

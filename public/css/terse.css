@@ -1,0 +1,34 @@
+
+
+.preferencias{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /*irve para definir el número de columnas que tendrá nuestra rejilla, así como los tamaños asignados a cada una.*/
+    /*border-style: dotted;*/
+    grid-gap: 30px; /*propiedad define el tamaño del espacio entre las filas y las columnas en un diseño de cuadrícula 
+                        y es una propiedad abreviada para las siguientes propiedades: grid-row-gap
+                            grid-column-gap*/
+    padding: 30px;
+    text-align: center;
+    
+  }
+  
+  .barraventa{
+    background-color: #83b1ec;
+    text-align: center;
+    padding: 3px 10px;
+    border: PowderBlue 5px double;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px
+  
+  }
+  
+  .preferencias{
+    background-color: rgb(229, 230, 228);
+    border: rgb(104, 110, 110) 5px solid;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    
+  }
+  
+  
