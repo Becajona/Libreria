@@ -19,20 +19,51 @@
     </head>
 
     <body>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="miembros.html" aria-current="page">Miembros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autores.html">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Libros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="detalle_prestamos.html">Detalle de Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="prestamos.html">Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categorias.html">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="editoriales.html">Editoriales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reseñas.html">Reseñas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="libroseditoriales.html">Libros Editoriales</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="libroscategorias.html">Libros Categoria</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
        
-
-        <nav class="nav justify-content-center">
-            <a class="nav-link active" href="miembros.html" aria-current="page">Miembros</a>
-            <a class="nav-link" href="autores.html">Autores</a>
-            <a class="nav-link" href="index.html"> Libros</a>
-            <a class="nav-link" href="detalle_prestamos.html"> Detalle de Préstamos</a>
-            <a class="nav-link" href="prestamos.html"> Préstamos</a> 
-            <a class="nav-link" href="categorias.html"> Categorías</a> 
-            <a class="nav-link" href="editoriales.html"> Editoriales</a> 
-            <a class="nav-link" href="reseñas.html"> Reseñas</a> 
-            <a class="nav-link" href="libroscategorias.html"> Libros Categorias</a> 
-        </nav>
-
         <div class="container mt-5">
             <h1 class="mb-4">Libro Categorías</h1>
             <h2 class="mb-3">Listado de Libro Categorías</h2>
@@ -52,50 +83,9 @@
           </div>
 
         
-          <script>
-            async function loadLibroCategorias() {
-              const response = await fetch('/api/librocategorias');
-              const librocategorias = await response.json();
-              const librocategoriasList = document.getElementById('librocategorias-list');
-              librocategoriasList.innerHTML = '';
-              librocategorias.forEach(entry => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                  <td>${entry.LibroID}</td>
-                  <td>${entry.CategoriaID}</td>
-                  <td>
-                    <button class="btn btn-primary btn-sm" onclick="editEntry(${entry.LibroID}, ${entry.CategoriaID})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteEntry(${entry.LibroID}, ${entry.CategoriaID})">Eliminar</button>
-                  </td>
-                `;
-                librocategoriasList.appendChild(tr);
-              });
-            }
-        
-            function editEntry(libroID, categoriaID) {
-              // Lógica para editar la entrada
-              console.log(`Editando LibroID: ${libroID}, CategoriaID: ${categoriaID}`);
-            }
-        
-            async function deleteEntry(libroID, categoriaID) {
-              if (confirm(`¿Está seguro que desea eliminar la entrada LibroID: ${libroID}, CategoriaID: ${categoriaID}?`)) {
-                const response = await fetch(`/api/librocategorias/${libroID}/${categoriaID}`, {
-                  method: 'DELETE'
-                });
-        
-                if (response.ok) {
-                  loadLibroCategorias();
-                } else {
-                  console.error('Error eliminando la entrada');
-                }
-              }
-            }
-        
-            document.addEventListener('DOMContentLoaded', () => {
-              loadLibroCategorias();
-            });
-          </script>
 
+          
+  <script src="js/librosCategorias.js"></script>
 
 
         <!-- Bootstrap JavaScript Libraries -->
