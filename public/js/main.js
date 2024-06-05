@@ -1,11 +1,5 @@
 
 
-
-document.addEventListener('DOMContentLoaded', loadBooks);
-
-
-
-
 // encabezado
 function loadContent(url, elementId) {
   fetch(url)
