@@ -23,7 +23,7 @@ async function loadMiembros() {
 }
 
 function editMiembro(miembroID) {
-    // Aquí va la lógica para editar el miembro con el ID proporcionado
+    
     console.log(`Editando miembro con ID: ${miembroID}`);
 }
 
@@ -34,7 +34,7 @@ async function deleteMiembro(miembroID) {
                 method: 'DELETE'
             });
             if (response.ok) {
-                loadMiembros(); // Recargar la lista de miembros después de eliminar
+                loadMiembros(); 
             } else {
                 console.error('Error al eliminar el miembro');
                 alert('Error al eliminar el miembro');
