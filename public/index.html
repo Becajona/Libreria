@@ -5,51 +5,308 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library Management System</title>
   
+
   <link rel="stylesheet" href="css/dise.css">
+  <link rel="stylesheet" href="css/carru.css">
+  <link rel="stylesheet" href="css/lib.css">
+  <link rel="stylesheet" href="css/autor.css">
+  <link rel="stylesheet" href="css/terse.css">
+  
   
 </head>
 <body>
-  <nav>
-    <ul>
-        <li><a href="miembros.html" class="text-white">Miembros</a></li>
-        <li><a href="autores.html">Autores</a></li>
-        <li><a href="libros.html">Libros</a></li>
-        <li><a href="prestamos.html">Préstamos</a></li>
-        <li><a href="detalle_prestamos.html">Detalle de Préstamos</a></li>
-        <li><a href="categorias.html">Categorías</a></li>
-        <li><a href="editoriales.html">Editoriales</a></li>
-        <li><a href="reseñas.html">Reseñas</a></li>
-        <li><a href="libroscategorias.html">Libros Categorias</a></li>
+ 
 
-    </ul>
-</nav>
+<div id="header"></div>
 
 
-  <h1>Library Management System</h1>
-
-  <h2>Register a Book</h2>
-  <form id="book-form">
-    <label for="Titulo">Title:</label>
-    <input type="text" id="Titulo" name="Titulo" required><br>
-    <label for="AutorID">Author ID:</label>
-    <input type="number" id="AutorID" name="AutorID" required><br>
-    <label for="Genero">Genero:</label>
-    <input type="text" id="Genero" name="Genero" required><br>
-    <label for="FechaPublicacion">Publication Date:</label>
-    <input type="date" id="FechaPublicacion" name="FechaPublicacion" required><br>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <h2> Hola </h2>
+  <!--carrusel del inicio -->
+  <div id="carousel-container">
+    <img class="carousel-image" src="imagenes/lib1.jpg" alt="Imagen 2">
+      <img class="carousel-image" src="imagenes/lib2.jpg" alt="Imagen 1">
+      <img class="carousel-image" src="imagenes/lib3.jpg" alt="Imagen 4">
+      <img class="carousel-image" src="imagenes/lib4.jpg" alt="Imagen 5">  
+      <img class="carousel-image" src="imagenes/lib6.jpg" alt="Imagen 3">
+      <div id="carousel-info">
+        <h1 id="welcome-title">BIENVENIDOS</h1>
+        <h2 id="main-title">Library Management System</h2>
+        <h5 id="main-parf">Para viajar lejos, no hay mejor nave que un libro </h5>
+         </div>
+    </div>
+    </div>
   
+    <script>
+      // JavaScript para crear el carrusel
+      let currentImage = 0;
+      const images = document.getElementsByClassName("carousel-image");
+      const info = document.getElementById("carousel-info");
   
-  <h2>Books List</h2>
+      function showImage(index) {
+        for (let i = 0; i < images.length; i++) {
+          images[i].style.display = "none";
+        }
+        images[index].style.display = "block";
+      }
   
-  <ul id="books-list"></ul>
+      function nextImage() {
+        currentImage = (currentImage + 1) % images.length;
+        showImage(currentImage);
+      }
+  
+      function prevImage() {
+        currentImage = (currentImage - 1 + images.length) % images.length;
+        showImage(currentImage);
+      }
+  
+      setInterval(nextImage, 4000); // Cambiar de imagen cada 4 segundos
+      showImage(currentImage);
+    </script>
+
+
+<!--carrusel del libros para mostrar-->
+<div class="book-carousel">
+  <button class="prev" onclick="moveBookSlide(-1)">&#10094;</button>
+  <div class="book-carousel-container">
+     
+    <div class="book-slide">
+          <img src="imagenes/lp1.jpg" alt="Libro 1">
+          <div class="book-info">
+              <h3>Título del Libro 1</h3>
+              <p>Autor: Autor 1</p>
+              <p>Género: Género 1</p>
+              <p>Fecha de Publicación: 2021-01-01</p>
+          </div>
+      </div>
+      <div class="book-slide">
+          <img src="imagenes/lip2.webp" alt="Libro 2">
+          <div class="book-info">
+              <h3>Título del Libro 2</h3>
+              <p>Autor: Autor 2</p>
+              <p>Género: Género 2</p>
+              <p>Fecha de Publicación: 2021-02-01</p>
+          </div>
+      </div>
+
+      <div class="book-slide">
+          <img src="imagenes/lp3.webp" alt="Libro 3">
+          <div class="book-info">
+              <h3>Título del Libro 3</h3>
+              <p>Autor: Autor 3</p>
+              <p>Género: Género 3</p>
+              <p>Fecha de Publicación: 2021-03-01</p>
+          </div>
+      </div>
+
+      <div class="book-slide">
+        <img src="imagenes/lp4.webp" alt="Libro 3">
+        <div class="book-info">
+            <h3>Título del Libro 3</h3>
+            <p>Autor: Autor 3</p>
+            <p>Género: Género 3</p>
+            <p>Fecha de Publicación: 2021-03-01</p>
+        </div>
+    </div>
+
+    <div class="book-slide">
+      <img src="imagenes/lp5.webp" alt="Libro 3">
+      <div class="book-info">
+          <h3>Título del Libro 3</h3>
+          <p>Autor: Autor 3</p>
+          <p>Género: Género 3</p>
+          <p>Fecha de Publicación: 2021-03-01</p>
+      </div>
+  </div>
+
+  <div class="book-slide">
+    <img src="imagenes/lp6.jpg" alt="Libro 3">
+    <div class="book-info">
+        <h3>Título del Libro 3</h3>
+        <p>Autor: Autor 3</p>
+        <p>Género: Género 3</p>
+        <p>Fecha de Publicación: 2021-03-01</p>
+    </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp6.webp" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp7.jpg" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp8.webp" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp9.jpg" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp10.jpg" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp11.webp" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+
+<div class="book-slide">
+  <img src="imagenes/lp12.jpg" alt="Libro 3">
+  <div class="book-info">
+      <h3>Título del Libro 3</h3>
+      <p>Autor: Autor 3</p>
+      <p>Género: Género 3</p>
+      <p>Fecha de Publicación: 2021-03-01</p>
+  </div>
+</div>
+      
+  </div>
+
+  <button class="next" onclick="moveBookSlide(1)">&#10095;</button>
+</div><!--fin del contenedor-->
+
+
+
+
+
+
+<!--seccion de autores-->
+
+<section class="featured-authors">
+  <h2>Autores Destacados</h2>
+  <div class="authors-container">
+      <div class="author">
+          <img src="imagenes/autor1.webp" alt="Autor 1">
+          <div class="author-info">
+              <h3>Guillermo del Toro</h3>
+              <p>Es un reconocido director, productor y escritor mexicano.
+                 Es conocido por sus películas de género fantástico y de terror, como "El Laberinto del Fauno", "Hellboy" y "Pacific Rim". Del Toro ha ganado numerosos premios,
+                 incluido el Premio de la Academia a la Mejor Dirección por "La Forma del Agua" en 2017</p>
+          </div>
+      </div>
+      <div class="author">
+          <img src="imagenes/autor2.jpg" alt="Autor 2">
+          <div class="author-info">
+              <h3>Miguel de Cervantes</h3>
+              <p>Miguel de Cervantes fue un escritor español del Siglo de Oro conocido principalmente por su obra maestra, "Don Quijote de la Mancha". Esta novela es considerada una de 
+                las obras más importantes de la literatura mundial y ha sido traducida a numerosos idiomas.</p>
+          </div>
+      </div>
+      <div class="author">
+          <img src="imagenes/autor3.jpg" alt="Autor 3">
+          <div class="author-info">
+              <h3>Tim Burton</h3>
+              <p>Es un director, productor y escritor estadounidense conocido por su estilo visual único y su enfoque en historias oscuras y fantásticas.
+                 Ha dirigido películas emblemáticas como "Beetlejuice", "El Joven Manos de Tijera" y "El Extraño Mundo de Jack".</p>
+          </div>
+      </div>
+      <!-- Añade más autores destacados según sea necesario -->
+  </div>
+</section>
+
+
+
+<!--tercera seccion -->
+
+
+<div class="preferencias">
+    
+  <div class="pcomple">
+    
+  <img src="imagenes/ic1.png">
+  <h3>56 años en
+    el mundo librero</h3>
+  <p>Con la más grande oferta Editorial y mejor selección infantil en México</p>
+    
+  </div>
+
+  <div class="pcomple">
+    
+  <img src="imagenes/ic2.png
+  ">
+  <h3>Atención
+    Personalizada</h3>
+    <p>Vive una gran experiencia de compra en 4 clicks/p>
+ 
+  </div>
+
+
+  <div class="pcomple">
+  
+    <img src="imagenes/ic3.png">
+    <h3>Compra
+      cómodamente</h3>
+  <p>Y paga en más de 3000 tiendas de conveniencia</p>
+  </div>
+  <div class="pcomple">
+   
+  <img src="imagenes/ic4.png">
+  <h3>Envíos
+    a domicilio</h3>
+  <p>Nacionales e Internacionales, con tarifas especiales</p>
+  
+  </div>
+
+  </div>
+
+
+
+
+  
 
   <script src="js/main.js"></script>
+   <div id="footer"></div>
 
+
+   <table class="table">
+    <thead>
+        <tr>
+            <th>EditorialID</th>
+            <th>Nombre</th>
+            <th>Pais</th>
+        </tr>
+    </thead>
+    <tbody id="editoriales-list">
+        <!-- Las filas de editoriales se añadirán aquí -->
+    </tbody>
+</table>
 
 </body>
 </html>
