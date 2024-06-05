@@ -195,3 +195,13 @@ app.delete('/api/reviews/:id', (req, res) => {
     res.status(204).send();
   });
 });
+
+
+// Rutas para gestionar editoriales
+app.get('/api/editoriales', (req, res) => {
+  db.query('SELECT * FROM Editoriales', (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+
