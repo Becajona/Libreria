@@ -5,9 +5,13 @@ async function loadAutores() {
         const autoresList = document.getElementById('autores-list');
         autoresList.innerHTML = '';
         autores.forEach(autor => {
-            const li = document.createElement('li');
-            li.textContent = `Autor ID: ${autor.AutorID}, Nombre: ${autor.Nombre}, Apellido: ${autor.Apellido}`;
-            autoresList.appendChild(li);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${autor.AutorID}</td>
+                <td>${autor.Nombre}</td>
+                <td>${autor.Apellido}</td>
+            `;
+            autoresList.appendChild(tr);
         });
     } else {
         console.error('Error al obtener la lista de autores.');
