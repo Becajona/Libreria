@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Autores</title>
+        <title>Reseñas</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -17,26 +17,68 @@
     </head>
 
     <body>
-        <nav class="nav justify-content-center ">
-            <a class="nav-link active" href="miembros.html" aria-current="page">Miembros</a>
-            <a class="nav-link" href="autores.html">Autores</a>
-            <a class="nav-link" href="index.html"> Libros</a>
-            <a class="nav-link" href="detalle_prestamos.html"> Detalle de Préstamos</a>
-            <a class="nav-link" href="prestamos.html"> Préstamos</a> 
-            <a class="nav-link" href="categorias.html"> Categorías</a> 
-            <a class="nav-link" href="editoriales.html"> Editoriales</a> 
-            <a class="nav-link" href="reseñas.html"> Reseñas</a> 
-          </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="miembros.html" aria-current="page">Miembros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="autores.html">Autores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Libros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="detalle_prestamos.html">Detalle de Préstamos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="prestamos.html">Préstamos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categorias.html">Categorías</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="editoriales.html">Editoriales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reseñas.html">Reseñas</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     
-        <h1>Reseñas</h1>
+        <div class="container mt-5">
+            <h1 class="mb-4">Reseñas</h1>
+            <h2 class="mb-3">Listado de Reseñas</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID Reseña</th>
+                            <th>ID Libro</th>
+                            <th>ID Miembro</th>
+                            <th>Calificación</th>
+                            <th>Comentario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reseñas-list">
+                        <!-- Las reseñas se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
 
-
-        <h1>Reseñas</h1>
-    <h2>Listado de Reseñas</h2>
-    <ul id="reseñas-list"></ul>
         
         <script src="js/resenas.js"></script>
-
 
         <!-- Bootstrap JavaScript Libraries -->
         <script

@@ -4,10 +4,17 @@ async function loadReseñas() {
     const reseñasList = document.getElementById('reseñas-list');
     reseñasList.innerHTML = '';
     reseñas.forEach(reseña => {
-        const li = document.createElement('li');
-        li.textContent = `Reseña ID: ${reseña.ReseñaID}, Libro ID: ${reseña.LibroID}, Miembro ID: ${reseña.MiembroID}, Calificación: ${reseña.Calificación}, Comentario: ${reseña.Comentario}, Fecha: ${reseña.Fecha}`;
-        reseñasList.appendChild(li);
-    });
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${reseña.ReseñaID}</td>
+            <td>${reseña.LibroID}</td>
+            <td>${reseña.MiembroID}</td>
+            <td>${reseña.Calificación}</td>
+            <td>${reseña.Comentario}</td>
+            <td>${reseña.Fecha}</td>
+        `;
+        reseñasList.appendChild(row);
+    }); 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
