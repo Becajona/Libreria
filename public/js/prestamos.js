@@ -13,3 +13,5 @@ async function loadPrestamos() {
 document.addEventListener('DOMContentLoaded', () => {
     loadPrestamos();
 });
+
+

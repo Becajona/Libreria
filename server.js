@@ -213,3 +213,21 @@ app.get('/api/libroseditoriales', (req, res) => {
     res.send(results);
   });
 });
+
+
+// Ruta para obtener librosCategoria
+app.get('/api/librocategorias', (req, res) => {
+  db.query('SELECT * FROM librocategorias', (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+
+// Ruta para eliminar un libroCategoria
+app.delete('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
+  const { libroID, categoriaID } = req.params;
+  db.query('DELETE FROM librocategorias WHERE LibroID = ? AND CategoriaID = ?', [libroID, categoriaID], (err, result) => {
+    if (err) throw err;
+    res.send({ message: 'Entrada eliminada exitosamente' });
+  });
+});
