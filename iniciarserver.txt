@@ -14,3 +14,9 @@ npm install express body-parser mysql2
 -Abrir consola y encender el servidor con el codigo linea 2
 
 -Abrir el navegador con la direccion localhost:3006
+
+
+
+git add .
+git commit -m "#Mensaje del cambio"
+git push origin main 
