@@ -173,6 +173,20 @@ app.put('/api/reviews/:id', (req, res) => {
   });
 });
 
+
+
+
+// Ruta para obtener categorías
+app.get('/api/categorias', (req, res) => {
+  db.query('SELECT * FROM Categorias', (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+
+
+
+
 app.delete('/api/reviews/:id', (req, res) => {
   const { id } = req.params;
   const query = 'DELETE FROM Reseñas WHERE ReseñaID = ?';
