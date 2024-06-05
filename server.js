@@ -65,14 +65,22 @@ app.put('/api/members/:id', (req, res) => {
   });
 });
 
+// Ruta para eliminar un miembro por su ID
 app.delete('/api/members/:id', (req, res) => {
   const { id } = req.params;
   const query = 'DELETE FROM Miembros WHERE MiembroID = ?';
-  db.query(query, [id], err => {
-    if (err) throw err;
-    res.status(204).send();
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error al eliminar el miembro:', err);
+      res.status(500).send({ message: 'Error al eliminar el miembro' });
+    } else {
+      console.log('Miembro eliminado correctamente');
+      res.status(204).send(); // No content
+    }
   });
 });
+
+
 
 // Rutas para gestionar libros
 app.get('/api/libros', (req, res) => {
@@ -117,6 +125,7 @@ app.get('/api/loans', (req, res) => {
     res.send(results);
   });
 });
+
 
 app.post('/api/loans', (req, res) => {
   const { MiembroID, FechaPrestamo, FechaDevolucion, Estado } = req.body;
@@ -231,6 +240,19 @@ app.delete('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
     res.send({ message: 'Entrada eliminada exitosamente' });
   });
 });
+
+
+// actualizar un libroCategoria
+app.put('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
+  const { libroID, categoriaID } = req.params;
+  const { nuevoLibroID, nuevaCategoriaID } = req.body;
+
+  db.query('UPDATE librocategorias SET LibroID = ?, CategoriaID = ? WHERE LibroID = ? AND CategoriaID = ?', [nuevoLibroID, nuevaCategoriaID, libroID, categoriaID], (err, result) => {
+    if (err) throw err;
+    res.send({ message: 'Entrada actualizada exitosamente' });
+  });
+});
+
 
 
 

@@ -16,6 +16,17 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+
+        <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Bootstrap JS (requiere jQuery) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     </head>
 
     <body>
@@ -24,22 +35,63 @@
         <div id="header"></div> <!--etiqueta para que aparezca en encabezado-->
         
 
-  <form id="book-form">
-    <label for="Titulo">Title:</label>
-    <input type="text" id="Titulo" name="Titulo" required><br>
-    <label for="AutorID">Author ID:</label>
-    <input type="number" id="AutorID" name="AutorID" required><br>
-    <label for="Genero">Genero:</label>
-    <input type="text" id="Genero" name="Genero" required><br>
-    <label for="FechaPublicacion">Publication Date:</label>
-    <input type="date" id="FechaPublicacion" name="FechaPublicacion" required><br>
-    <button type="submit">Submit</button>
-  </form>
-<br>
 
-  <h2>Listado de Miembros</h2>
-  <ul id="miembros-list"></ul>
+<div class="container mt-5">
+    <h2>Listado de Miembros</h2>
+    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#nuevoMiembroModal">Nuevo Miembro</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Miembro</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Fecha de Registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="miembros-list">
+            
+        </tbody>
+    </table>
+</div>
 
+
+<!-- agregar un nuevo miembro -->
+<div class="modal fade" id="nuevoMiembroModal" tabindex="-1" role="dialog" aria-labelledby="nuevoMiembroModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevoMiembroModalLabel">Agregar Nuevo Miembro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="nuevoMiembroForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecharegistro">Fecha de registro</label>
+                        <input type="date" class="form-control" id="fecharegistro" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Agregar Miembro</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

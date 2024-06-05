@@ -4,9 +4,13 @@ async function loadCategorias() {
     const categoriasList = document.getElementById('categorias-list');
     categoriasList.innerHTML = '';
     categorias.forEach(categoria => {
-        const li = document.createElement('li');
-        li.textContent = `Categoría ID: ${categoria.CategoriaID}, Nombre: ${categoria.Nombre}, Descripción: ${categoria.Descripcion}`;
-        categoriasList.appendChild(li);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${categoria.CategoriaID}</td>
+            <td>${categoria.Nombre}</td>
+            <td>${categoria.Descripcion}</td>
+        `;
+        categoriasList.appendChild(tr);
     });
 }
 
