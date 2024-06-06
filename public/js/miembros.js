@@ -1,5 +1,3 @@
-// js/miembros.js
-
 async function loadMiembros() {
     const response = await fetch('/api/members');
     const miembros = await response.json();
@@ -23,7 +21,6 @@ async function loadMiembros() {
 }
 
 function editMiembro(miembroID) {
-    
     console.log(`Editando miembro con ID: ${miembroID}`);
 }
 
@@ -46,8 +43,45 @@ async function deleteMiembro(miembroID) {
     }
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     loadMiembros();
+    
+    const nuevoMiembroForm = document.getElementById('nuevoMiembroForm');
+    nuevoMiembroForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const email = document.getElementById('email').value;
+        const fechaRegistro = document.getElementById('fecharegistro').value;
+
+        const nuevoMiembro = {
+            Nombre: nombre,
+            Apellido: apellido,
+            Email: email,
+            FechaRegistro: fechaRegistro
+        };
+
+        try {
+            const response = await fetch('/api/members', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevoMiembro)
+            });
+
+            if (response.ok) {
+                $('#nuevoMiembroModal').modal('hide');
+                nuevoMiembroForm.reset();
+                loadMiembros();
+            } else {
+                console.error('Error al agregar el nuevo miembro');
+                alert('Error al agregar el nuevo miembro');
+            }
+        } catch (error) {
+            console.error('Error al agregar el nuevo miembro:', error);
+            alert('Error al agregar el nuevo miembro');
+        }
+    });
 });
