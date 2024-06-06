@@ -21,7 +21,20 @@ async function loadMiembros() {
 }
 
 function editMiembro(miembroID) {
-    console.log(`Editando miembro con ID: ${miembroID}`);
+    fetch(`/api/members/${miembroID}`)
+        .then(response => response.json())
+        .then(miembro => {
+            document.getElementById('editarMiembroId').value = miembro.MiembroID;
+            document.getElementById('editarNombre').value = miembro.Nombre;
+            document.getElementById('editarApellido').value = miembro.Apellido;
+            document.getElementById('editarEmail').value = miembro.Email;
+            document.getElementById('editarFechaRegistro').value = miembro.FechaRegistro;
+            $('#editarMiembroModal').modal('show');
+        })
+        .catch(error => {
+            console.error('Error al cargar el miembro:', error);
+            alert('Error al cargar el miembro');
+        });
 }
 
 async function deleteMiembro(miembroID) {

@@ -1,6 +1,4 @@
 
-//registro del libro 
-
 document.getElementById('book-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -22,19 +20,36 @@ document.getElementById('book-form').addEventListener('submit', async (e) => {
   }
 });
 
-
-//mostrar libros
 async function loadBooks() {
     const response = await fetch('/api/libros');
     const books = await response.json();
     const booksList = document.getElementById('books-list');
     booksList.innerHTML = '';
     books.forEach(book => {
-      const li = document.createElement('li');
-      li.textContent = `${book.Titulo} by Author ID: ${book.AutorID}`;
-      booksList.appendChild(li);
+        const li = document.createElement('li');
+        li.innerHTML = `${book.Titulo} by Author ID: ${book.AutorID} 
+                        <button onclick="deleteBook(${book.LibroID})">Eliminar</button>`;
+        booksList.appendChild(li);
     });
-  }
-  
-  document.addEventListener('DOMContentLoaded', loadBooks);
-  
+}
+
+async function deleteBook(libroID) {
+    if (confirm('¿Estás seguro de que quieres eliminar este libro?')) {
+        try {
+            const response = await fetch(`/api/libros/${libroID}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                loadBooks(); 
+            } else {
+                console.error('Error al eliminar el libro');
+                alert('Error al eliminar el libro');
+            }
+        } catch (error) {
+            console.error('Error al eliminar el libro:', error);
+            alert('Error al eliminar el libro');
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadBooks);

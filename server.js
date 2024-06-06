@@ -55,16 +55,17 @@ app.post('/api/members', (req, res) => {
   });
 });
 
-
 app.put('/api/members/:id', (req, res) => {
   const { id } = req.params;
   const { Nombre, Apellido, Email, FechaRegistro } = req.body;
   const query = 'UPDATE Miembros SET Nombre = ?, Apellido = ?, Email = ?, FechaRegistro = ? WHERE MiembroID = ?';
-  db.query(query, [Nombre, Apellido, Email, FechaRegistro, id], err => {
+  db.query(query, [Nombre, Apellido, Email, FechaRegistro, id], (err, results) => {
     if (err) throw err;
-    res.send('Member updated successfully.');
+    res.sendStatus(200);
   });
 });
+
+
 
 // Ruta para eliminar un miembro por su ID
 app.delete('/api/members/:id', (req, res) => {
