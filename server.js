@@ -157,41 +157,121 @@ app.delete('/api/loans/:id', (req, res) => {
   });
 });
 
-// Rutas para gestionar reseñas
+
+// Endpoint para obtener los detalles de reseñas
 app.get('/api/reviews', (req, res) => {
-  db.query('SELECT * FROM Reseñas', (err, results) => {
-    if (err) throw err;
-    res.send(results);
+  const query = 'SELECT * FROM Reseñas';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching reviews from the database:', err);
+      res.status(500).send('Error fetching reviews from the database');
+      return;
+    }
+    res.json(results);
   });
 });
 
+// Ruta para agregar una nueva reseña
 app.post('/api/reviews', (req, res) => {
-  const { LibroID, MiembroID, Calificación, Comentario, Fecha } = req.body;
+  const { libroID, miembroID, calificación, comentario, fecha } = req.body;
   const query = 'INSERT INTO Reseñas (LibroID, MiembroID, Calificación, Comentario, Fecha) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [LibroID, MiembroID, Calificación, Comentario, Fecha], (err, results) => {
-    if (err) throw err;
-    res.status(201).send({ id: results.insertId });
+  db.query(query, [libroID, miembroID, calificación, comentario, fecha], (err, result) => {
+    if (err) {
+      console.error('Error adding new review:', err);
+      res.status(500).send({ message: 'Error adding new review' });
+    } else {
+      res.status(201).send({ message: 'Review added successfully' });
+    }
   });
 });
 
+// Ruta para eliminar una reseña por su ID
+app.delete('/api/reviews/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM Reseñas WHERE ReseñaID = ?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error deleting review:', err);
+      res.status(500).send({ message: 'Error deleting review' });
+    } else {
+      res.status(204).send(); // No content
+    }
+  });
+});
+
+// Ruta para actualizar una reseña por su ID
 app.put('/api/reviews/:id', (req, res) => {
   const { id } = req.params;
-  const { LibroID, MiembroID, Calificación, Comentario, Fecha } = req.body;
+  const { libroID, miembroID, calificación, comentario, fecha } = req.body;
   const query = 'UPDATE Reseñas SET LibroID = ?, MiembroID = ?, Calificación = ?, Comentario = ?, Fecha = ? WHERE ReseñaID = ?';
-  db.query(query, [LibroID, MiembroID, Calificación, Comentario, Fecha, id], err => {
-    if (err) throw err;
-    res.send('Review updated successfully.');
+  db.query(query, [libroID, miembroID, calificación, comentario, fecha, id], (err, result) => {
+    if (err) {
+      console.error('Error updating review:', err);
+      res.status(500).send({ message: 'Error updating review' });
+    } else {
+      res.status(200).send({ message: 'Review updated successfully' });
+    }
   });
 });
 
 
 
 
-// Ruta para obtener categorías
+
+
+// Endpoint para obtener los detalles de categorías
 app.get('/api/categorias', (req, res) => {
-  db.query('SELECT * FROM Categorias', (err, results) => {
-    if (err) throw err;
-    res.send(results);
+  const query = 'SELECT * FROM Categorias';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching categories from the database:', err);
+      res.status(500).send('Error fetching categories from the database');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Ruta para agregar una nueva categoría
+app.post('/api/categorias', (req, res) => {
+  const { nombre, descripcion } = req.body;
+  const query = 'INSERT INTO Categorias (Nombre, Descripcion) VALUES (?, ?)';
+  db.query(query, [nombre, descripcion], (err, result) => {
+    if (err) {
+      console.error('Error adding new category:', err);
+      res.status(500).send({ message: 'Error adding new category' });
+    } else {
+      res.status(201).send({ message: 'Category added successfully' });
+    }
+  });
+});
+
+// Ruta para eliminar una categoría por su ID
+app.delete('/api/categorias/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM Categorias WHERE CategoriaID = ?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error deleting category:', err);
+      res.status(500).send({ message: 'Error deleting category' });
+    } else {
+      res.status(204).send(); // No content
+    }
+  });
+});
+
+// Ruta para actualizar una categoría por su ID
+app.put('/api/categorias/:id', (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion } = req.body;
+  const query = 'UPDATE Categorias SET Nombre = ?, Descripcion = ? WHERE CategoriaID = ?';
+  db.query(query, [nombre, descripcion, id], (err, result) => {
+    if (err) {
+      console.error('Error updating category:', err);
+      res.status(500).send({ message: 'Error updating category' });
+    } else {
+      res.status(200).send({ message: 'Category updated successfully' });
+    }
   });
 });
 
@@ -207,14 +287,62 @@ app.delete('/api/reviews/:id', (req, res) => {
   });
 });
 
-
-// Rutas para gestionar editoriales
+// Endpoint para obtener los detalles de editoriales
 app.get('/api/editoriales', (req, res) => {
-  db.query('SELECT * FROM Editoriales', (err, results) => {
-    if (err) throw err;
-    res.send(results);
+  const query = 'SELECT * FROM Editoriales';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching editorials from the database:', err);
+      res.status(500).send('Error fetching editorials from the database');
+      return;
+    }
+    res.json(results);
   });
 });
+
+// Ruta para agregar una nueva editorial
+app.post('/api/editoriales', (req, res) => {
+  const { nombre, pais } = req.body;
+  const query = 'INSERT INTO Editoriales (Nombre, Pais) VALUES (?, ?)';
+  db.query(query, [nombre, pais], (err, result) => {
+    if (err) {
+      console.error('Error adding new editorial:', err);
+      res.status(500).send({ message: 'Error adding new editorial' });
+    } else {
+      res.status(201).send({ message: 'Editorial added successfully' });
+    }
+  });
+});
+
+// Ruta para eliminar una editorial por su ID
+app.delete('/api/editoriales/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM Editoriales WHERE EditorialID = ?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error deleting editorial:', err);
+      res.status(500).send({ message: 'Error deleting editorial' });
+    } else {
+      res.status(204).send(); // No content
+    }
+  });
+});
+
+// Ruta para actualizar una editorial por su ID
+app.put('/api/editoriales/:id', (req, res) => {
+  const { id } = req.params;
+  const { nombre, pais } = req.body;
+  const query = 'UPDATE Editoriales SET Nombre = ?, Pais = ? WHERE EditorialID = ?';
+  db.query(query, [nombre, pais, id], (err, result) => {
+    if (err) {
+      console.error('Error updating editorial:', err);
+      res.status(500).send({ message: 'Error updating editorial' });
+    } else {
+      res.status(200).send({ message: 'Editorial updated successfully' });
+    }
+  });
+});
+
 
 
 // Ruta para obtener libroseditoriales
@@ -311,16 +439,51 @@ app.get('/api/prestamos', (req, res) => {
   });
 });
 
-// Endpoint para insertar nuevos préstamos
-app.post('/api/loans', (req, res) => {
-  const { MiembroID, LibroID, FechaPrestamo, FechaDevolucion, Estado } = req.body;
+// Ruta para agregar un nuevo préstamo
+app.post('/api/prestamos', (req, res) => {
+  const { miembroID, libroID, fechaPrestamo, fechaDevolucion, estado } = req.body;
   const query = 'INSERT INTO Prestamos (MiembroID, LibroID, FechaPrestamo, FechaDevolucion, Estado) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [MiembroID, LibroID, FechaPrestamo, FechaDevolucion, Estado], (err, results) => {
+  db.query(query, [miembroID, libroID, fechaPrestamo, fechaDevolucion, estado], (err, result) => {
     if (err) {
-      console.error('Error inserting data into the database:', err);
-      res.status(500).send('Error inserting data into the database');
-      return;
+      console.error('Error adding new prestamo:', err);
+      res.status(500).send({ message: 'Error adding new prestamo' });
+    } else {
+      res.status(201).send({ message: 'Prestamo added successfully' });
     }
-    res.status(201).send({ id: results.insertId });
+  });
+});
+
+// Ruta para eliminar un préstamo por su ID
+app.delete('/api/prestamos/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM Prestamos WHERE PrestamoID = ?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error deleting prestamo:', err);
+      res.status(500).send({ message: 'Error deleting prestamo' });
+    } else {
+      res.status(204).send(); // No content
+    }
+  });
+});
+
+
+
+// Ruta para actualizar un préstamo por su ID
+app.put('/api/prestamos/:id', (req, res) => {
+  const { id } = req.params;
+  const { miembroID, libroID, fechaPrestamo, fechaDevolucion, estado } = req.body;
+  const query = `
+    UPDATE Prestamos 
+    SET MiembroID = ?, LibroID = ?, FechaPrestamo = ?, FechaDevolucion = ?, Estado = ?
+    WHERE PrestamoID = ?
+  `;
+  db.query(query, [miembroID, libroID, fechaPrestamo, fechaDevolucion, estado, id], (err, result) => {
+    if (err) {
+      console.error('Error updating prestamo:', err);
+      res.status(500).send({ message: 'Error updating prestamo' });
+    } else {
+      res.status(200).send({ message: 'Prestamo updated successfully' });
+    }
   });
 });
