@@ -387,29 +387,55 @@ app.put('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
 
 
 
-// Insertar autores
+// Ruta para obtener todos los autores
+app.get('/api/autores', (req, res) => {
+  const query = 'SELECT * FROM Autores';
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching authors:', err);
+          res.status(500).send('Error fetching authors from database');
+          return;
+      }
+      res.send(results);
+  });
+});
+
+// Ruta para agregar un autor
 app.post('/api/autores', (req, res) => {
   const { AutorID, Nombre, Apellido } = req.body;
   const query = 'INSERT INTO Autores (AutorID, Nombre, Apellido) VALUES (?, ?, ?)';
   db.query(query, [AutorID, Nombre, Apellido], (err, results) => {
-      if (err) {
-          console.error('Error al insertar autor:', err);
-          res.status(500).send('Error al insertar autor en la base de datos');
-          return;
-      }
+      if (err) throw err;
       res.status(201).send({ id: results.insertId });
   });
 });
 
-// Ruta para obtener todos los autores
-app.get('/api/autores', (req, res) => {
-  db.query('SELECT * FROM Autores', (err, results) => {
+// Ruta para eliminar un autor
+app.delete('/api/autores/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM Autores WHERE AutorID = ?';
+  db.query(query, [id], (err, results) => {
       if (err) {
-          console.error('Error al obtener autores:', err);
-          res.status(500).send('Error al obtener autores de la base de datos');
+          console.error('Error deleting author:', err);
+          res.status(500).send('Error deleting author from database');
           return;
       }
-      res.send(results);
+      res.sendStatus(204);
+  });
+});
+
+// Ruta para editar un autor
+app.put('/api/autores/:id', (req, res) => {
+  const { id } = req.params;
+  const { Nombre, Apellido } = req.body;
+  const query = 'UPDATE Autores SET Nombre = ?, Apellido = ? WHERE AutorID = ?';
+  db.query(query, [Nombre, Apellido, id], (err, results) => {
+      if (err) {
+          console.error('Error updating author:', err);
+          res.status(500).send('Error updating author in database');
+          return;
+      }
+      res.sendStatus(204);
   });
 });
 
