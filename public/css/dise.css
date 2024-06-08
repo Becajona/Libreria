@@ -7,8 +7,9 @@ body {
   
 }
 
+/*contenedor rojo de la tabla prestamo */
 .container {
-  max-width: 600px;
+  max-width: 1000px; /*tamaño del ancho del contenedor*/
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
@@ -28,6 +29,7 @@ body {
   color: #ffffff;
   margin-bottom: 20px;
 }
+
 /*LISTA DE LIBROS inicio*/
 #books-list {
   list-style: none;

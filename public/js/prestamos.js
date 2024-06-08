@@ -18,9 +18,9 @@ async function loadPrestamos() {
                 <td>${prestamo.FechaPrestamo}</td>
                 <td>${prestamo.FechaDevolucion}</td>
                 <td>${prestamo.Estado}</td>
-                <td>
-                    <button class="btn btn-primary btn-sm" onclick="editPrestamo(${prestamo.PrestamoID})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="deletePrestamo(${prestamo.PrestamoID})">Eliminar</button>
+                <td><button class="btn btn-primary btn-sm" onclick="editPrestamo(${prestamo.PrestamoID})">Editar</button>
+                 </td>
+               <td> <button class="btn btn-danger btn-sm" onclick="deletePrestamo(${prestamo.PrestamoID})">Eliminar</button>
                 </td>
             `;
             prestamosList.appendChild(tr);
