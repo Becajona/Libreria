@@ -15,17 +15,18 @@
         />
         <link rel="stylesheet" href="css/dise.css">
     </head>
+    
+    
 
     <body>
-        <nav class="nav justify-content-center">
-            <a class="nav-link" href="miembros.html">Miembros</a>
-            <a class="nav-link" href="autores.html">Autores</a>
-            <a class="nav-link" href="index.html">Libros</a>
-            <a class="nav-link active" href="prestamos.html" aria-current="page">Préstamos</a>
-            <a class="nav-link" href="categorias.html">Categorías</a>
-            <a class="nav-link" href="editoriales.html">Editoriales</a>
-            <a class="nav-link" href="reseñas.html">Reseñas</a>
-        </nav>
+       
+        <div id="header"></div> <!--etiqueta para que aparezca en encabezado-->
+        <style>
+            body {
+                background-color: black;
+            }
+        </style>
+        
         <div class="container mt-4">
             <h1>Préstamos</h1>
             <button class="btn btn-success mb-3" data-toggle="modal" data-target="#nuevoPrestamoModal">Nuevo Préstamo</button>
@@ -88,6 +89,8 @@
         </div>
                 
         <script src="js/prestamos.js"></script>
+        
+        <script src="js/main.js"></script>
 
         <!-- Bootstrap JavaScript Libraries -->
         <script
