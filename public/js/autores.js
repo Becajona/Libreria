@@ -117,7 +117,7 @@ async function loadAutores() {
 
 async function searchAuthorImage(authorName) {
     const customSearchUrl = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(authorName)}&cx=371efca1b815e4096&key=AIzaSyDn7KHmvOOvVDxMCYnoeV4N-oOrPF-7QeQ&searchType=image`;
-    //irl de la api 
+
     try {
         const response = await fetch(customSearchUrl);
         if (!response.ok) {
@@ -127,11 +127,11 @@ async function searchAuthorImage(authorName) {
         if (!data.items || data.items.length === 0) {
             throw new Error('No se encontraron imágenes.');
         }
-        // Obtener la URL de la primera imagen que eneucntraaa
+        // Obtener la URL de la primera imagen encontrada
         return data.items[0].link;
     } catch (error) {
         console.error('Error al buscar la imagen del autor:', error);
-        return 'https://placehold.it/200x200'; // imagen desconocido si no lo enconrto 
+        return 'https://placehold.it/200x200'; // Imagen de relleno si no se encuentra una imagen
     }
 }
 
