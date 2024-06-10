@@ -1,3 +1,4 @@
+
 async function loadCategorias() {
     const response = await fetch('/api/categorias');
     const categorias = await response.json();
@@ -44,7 +45,7 @@ function showAddCategoriaModal() {
 
 function showEditCategoriaModal(categoriaID, nombre, descripcion) {
     document.getElementById('categoriaModalLabel').textContent = 'Editar Categoría';
-    document.getElementById('nombre').value = nombre;
+    document.getElementById('categories').value = nombre;
     document.getElementById('descripcion').value = descripcion;
     document.getElementById('categoriaForm').dataset.categoriaId = categoriaID;
     $('#categoriaModal').modal('show');
@@ -53,7 +54,7 @@ function showEditCategoriaModal(categoriaID, nombre, descripcion) {
 document.getElementById('categoriaForm').addEventListener('submit', async (event) => {
     event.preventDefault();
     const categoriaID = event.target.dataset.categoriaId;
-    const nombre = document.getElementById('nombre').value;
+    const nombre = document.getElementById('categories').value;
     const descripcion = document.getElementById('descripcion').value;
 
     const method = categoriaID ? 'PUT' : 'POST';

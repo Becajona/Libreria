@@ -41,33 +41,54 @@
           </div>
       </div>
   
-      <!-- Modal para agregar/editar categoría -->
-      <div class="modal fade" id="categoriaModal" tabindex="-1" role="dialog" aria-labelledby="categoriaModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="categoriaModalLabel">Agregar Categoría</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body">
-                      <form id="categoriaForm">
-                          <div class="form-group">
-                              <label for="nombre">Nombre</label>
-                              <input type="text" class="form-control" id="nombre" required>
-                          </div>
-                          <div class="form-group">
-                              <label for="descripcion">Descripción</label>
-                              <input type="text" class="form-control" id="descripcion" required>
-                          </div>
-                          <button type="submit" class="btn btn-primary">Guardar</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  
+       <!-- Modal para agregar/editar categoría -->
+       <div class="modal fade" id="categoriaModal" tabindex="-1" role="dialog" aria-labelledby="categoriaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoriaModalLabel">Agregar Categoría</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="categoriaForm">
+                        <div class="form-group">
+                            <label for="categories">Elige una categoría:</label>
+                            <select id="categories" name="categories" class="form-control" required>
+                                <option value="novela">Novela</option>
+                                <option value="ciencia_ficcion">Ciencia Ficción</option>
+                                <option value="fantasia">Fantasía</option>
+                                <option value="biografia">Biografía</option>
+                                <option value="historia">Historia</option>
+                                <option value="arte">Arte</option>
+                                <option value="cocina">Cocina</option>
+                                <option value="viajes">Viajes</option>
+                                <option value="autoayuda">Autoayuda</option>
+                                <option value="infantil">Infantil</option>
+                                <option value="juvenil">Juvenil</option>
+                                <option value="misterio">Misterio</option>
+                                <option value="poesia">Poesía</option>
+                                <option value="comics">Cómics</option>
+                                <option value="ensayo">Ensayo</option>
+                                <option value="tecnologia">Tecnología</option>
+                                <option value="deportes">Deportes</option>
+                                <option value="religion">Religión</option>
+                                <option value="negocios">Negocios</option>
+                                <option value="filosofia">Filosofía</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
