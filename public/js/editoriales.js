@@ -1,4 +1,3 @@
-
 async function loadEditoriales() {
     const response = await fetch('/api/editoriales');
     const editoriales = await response.json();
@@ -7,7 +6,7 @@ async function loadEditoriales() {
     editoriales.forEach(editorial => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${editorial.EditorialID}</td>
+            
             <td>${editorial.Nombre}</td>
             <td>${editorial.Pais}</td>
             <td>
@@ -45,8 +44,8 @@ function showAddEditorialModal() {
 
 function showEditEditorialModal(editorialID, nombre, pais) {
     document.getElementById('editorialModalLabel').textContent = 'Editar Editorial';
-    document.getElementById('nombre').value = nombre;
-    document.getElementById('pais').value = pais;
+    document.getElementById('editorials').value = nombre;
+    document.getElementById('countries').value = pais;
     document.getElementById('editorialForm').dataset.editorialId = editorialID;
     $('#editorialModal').modal('show');
 }
@@ -54,8 +53,8 @@ function showEditEditorialModal(editorialID, nombre, pais) {
 document.getElementById('editorialForm').addEventListener('submit', async (event) => {
     event.preventDefault();
     const editorialID = event.target.dataset.editorialId;
-    const nombre = document.getElementById('nombre').value;
-    const pais = document.getElementById('pais').value;
+    const nombre = document.getElementById('editorials').value;
+    const pais = document.getElementById('countries').value;
 
     const method = editorialID ? 'PUT' : 'POST';
     const url = editorialID ? `/api/editoriales/${editorialID}` : '/api/editoriales';
