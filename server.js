@@ -85,7 +85,7 @@ app.delete('/api/members/:id', (req, res) => {
 });
 
 
-
+///*********************************librossss******************************* */
 // Rutas para gestionar libros
 app.get('/api/libros', (req, res) => {
   db.query('SELECT * FROM Libros', (err, results) => {
@@ -113,14 +113,41 @@ app.put('/api/libros/:id', (req, res) => {
   });
 });
 
+
 app.delete('/api/libros/:id', (req, res) => {
   const { id } = req.params;
-  const query = 'DELETE FROM Libros WHERE LibroID = ?';
-  db.query(query, [id], err => {
-    if (err) throw err;
-    res.status(204).send();
+  
+  // Eliminar registros relacionados en la tabla libroseditoriales
+  const deleteRelatedQuery = 'DELETE FROM libroseditoriales WHERE LibroID = ?';
+  db.query(deleteRelatedQuery, [id], (err, result) => {
+    if (err) {
+      console.error('Error al eliminar registros relacionados:', err);
+      return res.status(500).send('Error al eliminar registros relacionados.');
+    }
+    
+    // Luego eliminar el libro de la tabla Libros
+    const deleteBookQuery = 'DELETE FROM Libros WHERE LibroID = ?';
+    db.query(deleteBookQuery, [id], (err, result) => {
+      if (err) {
+        console.error('Error al eliminar el libro:', err);
+        return res.status(500).send('Error al eliminar el libro.');
+      }
+      
+      res.send('Libro eliminado correctamente.');
+    });
   });
 });
+
+/******************************************************** */
+
+
+
+
+
+
+
+
+
 
 // Rutas para gestionar préstamos
 app.get('/api/loans', (req, res) => {
