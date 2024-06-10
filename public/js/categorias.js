@@ -7,7 +7,7 @@ async function loadCategorias() {
     categorias.forEach(categoria => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${categoria.CategoriaID}</td>
+            
             <td>${categoria.Nombre}</td>
             <td>${categoria.Descripcion}</td>
             <td>

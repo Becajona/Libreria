@@ -6,7 +6,6 @@ async function loadMiembros() {
     miembros.forEach(miembro => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${miembro.MiembroID}</td>
             <td>${miembro.Nombre}</td>
             <td>${miembro.Apellido}</td>
             <td>${miembro.Email}</td>
