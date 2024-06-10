@@ -34,55 +34,71 @@
     
 -->
 <div class="container">
-=======
->>>>>>> 5b86cda83837259c3c90dabf28b3d57a96d634a8
 
--->
-        
-<div class="container mt-5">
-    <h1 class="mb-4">Autores</h1>
-    <h2 class="mb-3">Listado de Autores</h2>
-    <button class="btn btn-success mb-3" onclick="showAddAutorModal()">Agregar Autor</button>
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Autor ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody id="autores-list"></tbody>
-        </table>
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 350px; /* Aquí puedes ajustar la altura deseada */
+            object-fit: cover; /* Esto ajustará la imagen dentro del contenedor sin distorsionarla */
+        }
+    </style>
+    
+    <div class="container mt-5">
+        <h1 class="mb-4">Autores</h1>
+        <h2 class="mb-3">Listado de Autores</h2>
+        <button class="btn btn-success mb-3" onclick="showAddAutorModal()">Agregar Autor</button>
+        <div class="row" id="autores-list"></div>
     </div>
-</div>
-
-<!-- Modal para agregar/editar autor -->
-<div class="modal fade" id="autorModal" tabindex="-1" role="dialog" aria-labelledby="autorModalLabel" aria-hidden="true">
+    
+<!-- Modal para agregar autor -->
+<div class="modal fade" id="agregarAutorModal" tabindex="-1" role="dialog" aria-labelledby="agregarAutorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="autorModalLabel">Agregar Autor</h5>
+                <h5 class="modal-title" id="agregarAutorModalLabel">Agregar Autor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="autorForm">
-                    <input type="hidden" id="edit-autorID">
-                    <div class="form-group">
-                        <label for="autorID">ID Autor</label>
-                        <input type="number" class="form-control" id="autorID" required>
-                    </div>
+                <form id="agregarAutorForm">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" required>
+                        <input type="text" class="form-control" id="agregar-nombre" required>
                     </div>
                     <div class="form-group">
                         <label for="apellido">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" required>
+                        <input type="text" class="form-control" id="agregar-apellido" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para editar autor -->
+<div class="modal fade" id="editarAutorModal" tabindex="-1" role="dialog" aria-labelledby="editarAutorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarAutorModalLabel">Editar Autor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editarAutorForm">
+                    <div class="form-group">
+                        <label for="editar-autorID">ID Autor</label>
+                        <input type="text" class="form-control" id="editar-autorID" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-nombre">Nombre</label>
+                        <input type="text" class="form-control" id="editar-nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-apellido">Apellido</label>
+                        <input type="text" class="form-control" id="editar-apellido" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>

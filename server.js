@@ -398,13 +398,14 @@ app.put('/api/librocategorias/:libroID/:categoriaID', (req, res) => {
 
 
 
+/*---------------------------------------Auores---------------------- */
 
 
-// Insertar autores
+// Insertar un nuevo autor
 app.post('/api/autores', (req, res) => {
-  const { AutorID, Nombre, Apellido } = req.body;
-  const query = 'INSERT INTO Autores (AutorID, Nombre, Apellido) VALUES (?, ?, ?)';
-  db.query(query, [AutorID, Nombre, Apellido], (err, results) => {
+  const { Nombre, Apellido } = req.body;
+  const query = 'INSERT INTO Autores (Nombre, Apellido) VALUES (?, ?)';
+  db.query(query, [Nombre, Apellido], (err, results) => {
       if (err) {
           console.error('Error al insertar autor:', err);
           res.status(500).send('Error al insertar autor en la base de datos');
@@ -414,7 +415,7 @@ app.post('/api/autores', (req, res) => {
   });
 });
 
-// Ruta para obtener todos los autores
+// Obtener todos los autores
 app.get('/api/autores', (req, res) => {
   db.query('SELECT * FROM Autores', (err, results) => {
       if (err) {
@@ -426,7 +427,36 @@ app.get('/api/autores', (req, res) => {
   });
 });
 
+// Actualizar un autor existente
+app.put('/api/autores/:id', (req, res) => {
+  const AutorID = req.params.id;
+  const { Nombre, Apellido } = req.body;
+  const query = 'UPDATE Autores SET Nombre = ?, Apellido = ? WHERE AutorID = ?';
+  db.query(query, [Nombre, Apellido, AutorID], (err, results) => {
+      if (err) {
+          console.error('Error al actualizar autor:', err);
+          res.status(500).send('Error al actualizar autor en la base de datos');
+          return;
+      }
+      res.status(200).send('Autor actualizado correctamente');
+  });
+});
 
+// Eliminar un autor existente
+app.delete('/api/autores/:id', (req, res) => {
+  const AutorID = req.params.id;
+  const query = 'DELETE FROM Autores WHERE AutorID = ?';
+  db.query(query, [AutorID], (err, results) => {
+      if (err) {
+          console.error('Error al eliminar autor:', err);
+          res.status(500).send('Error al eliminar autor de la base de datos');
+          return;
+      }
+      res.status(200).send('Autor eliminado correctamente');
+  });
+});
+
+/***********************************************************************************/
 
 // Endpoint para obtener los detalles de préstamos
 app.get('/api/prestamos', (req, res) => {
