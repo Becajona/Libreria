@@ -347,11 +347,17 @@ app.put('/api/editoriales/:id', (req, res) => {
 
 // Ruta para obtener libroseditoriales
 app.get('/api/libroseditoriales', (req, res) => {
-  db.query('SELECT * FROM libroseditoriales', (err, results) => {
+  db.query(`
+    SELECT L.Titulo AS TituloLibro, E.Nombre AS NombreEditorial
+    FROM LibrosEditoriales LE
+    JOIN Libros L ON LE.LibroID = L.LibroID
+    JOIN Editoriales E ON LE.EditorialID = E.EditorialID;
+  `, (err, results) => {
     if (err) throw err;
     res.send(results);
   });
 });
+
 
 
 

@@ -6,25 +6,25 @@ async function loadLibrosEditoriales() {
     libroseditoriales.forEach(entry => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${entry.LibroID}</td>
-            <td>${entry.EditorialID}</td>
+            <td>${entry.TituloLibro}</td>
+            <td>${entry.NombreEditorial}</td>
             <td>
-                <button class="btn btn-primary btn-sm" onclick="editEntry(${entry.LibroID}, ${entry.EditorialID})">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteEntry(${entry.LibroID}, ${entry.EditorialID})">Eliminar</button>
+                <button class="btn btn-primary btn-sm" onclick="editEntry('${entry.TituloLibro}', '${entry.NombreEditorial}')">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteEntry('${entry.TituloLibro}', '${entry.NombreEditorial}')">Eliminar</button>
             </td>
         `;
         libroseditorialesList.appendChild(tr);
     });
 }
 
-function editEntry(libroID, editorialID) {
+function editEntry(libroTitulo, editorialNombre) {
     // Lógica para editar la entrada
-    console.log(`Editando LibroID: ${libroID}, EditorialID: ${editorialID}`);
+    console.log(`Editando TituloLibro: ${libroTitulo}, NombreEditorial: ${editorialNombre}`);
 }
 
-function deleteEntry(libroID, editorialID) {
+function deleteEntry(libroTitulo, editorialNombre) {
     // Lógica para eliminar la entrada
-    console.log(`Eliminando LibroID: ${libroID}, EditorialID: ${editorialID}`);
+    console.log(`Eliminando TituloLibro: ${libroTitulo}, NombreEditorial: ${editorialNombre}`);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
