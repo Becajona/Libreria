@@ -1,3 +1,22 @@
+async function loadMiembros() {
+    try {
+        const response = await fetch('/api/miembros');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const miembros = await response.json();
+        const miembroSelect = document.getElementById('miembroID');
+        miembros.forEach(miembro => {
+            const option = document.createElement('option');
+            option.value = miembro.MiembroID;
+            option.textContent = miembro.Nombre;
+            miembroSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error fetching miembros:', error);
+    }
+}
+
 async function loadPrestamos() {
     console.log('Loading prestamos...');
     try {
@@ -52,6 +71,7 @@ function editPrestamo(prestamoID) {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadPrestamos();
+    loadMiembros();
 
     document.getElementById('nuevoPrestamoForm').addEventListener('submit', async (event) => {
         event.preventDefault();

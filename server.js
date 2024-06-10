@@ -38,6 +38,8 @@ db.connect(err => {
   console.log('Connected to the MySQL database.');
 });
 
+
+/*---------------------------------------Miembros---------------------- */
 // Rutas para gestionar miembros
 app.get('/api/members', (req, res) => {
   db.query('SELECT * FROM Miembros', (err, results) => {
@@ -528,5 +530,13 @@ app.put('/api/prestamos/:id', (req, res) => {
     } else {
       res.status(200).send({ message: 'Prestamo updated successfully' });
     }
+  });
+});
+
+// Ruta para obtener todos los miembros
+app.get('/api/miembros', (req, res) => {
+  db.query('SELECT MiembroID, Nombre FROM Miembros', (err, results) => {
+    if (err) throw err;
+    res.send(results);
   });
 });

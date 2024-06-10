@@ -62,8 +62,10 @@
                     <div class="modal-body">
                         <form id="nuevoPrestamoForm">
                             <div class="form-group">
-                                <label for="miembroID">ID Miembro</label>
-                                <input type="number" class="form-control" id="miembroID" required>
+                                <label for="miembroID">Miembro</label>
+                                <select class="form-control" id="miembroID" required>
+                                    <option value="">Seleccione un miembro</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="libroID">ID Libro</label>
@@ -87,6 +89,8 @@
                 </div>
             </div>
         </div>
+
+        
                 
         <script src="js/prestamos.js"></script>
         
