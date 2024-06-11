@@ -134,4 +134,3 @@ async function searchAuthorImage(authorName) {
         return 'https://placehold.it/200x200'; // Imagen de relleno si no se encuentra una imagen
     }
 }
-

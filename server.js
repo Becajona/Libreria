@@ -39,7 +39,6 @@ db.connect(err => {
 });
 
 
-/*---------------------------------------Miembros---------------------- */
 // Rutas para gestionar miembros
 app.get('/api/members', (req, res) => {
   db.query('SELECT * FROM Miembros', (err, results) => {
@@ -98,45 +97,98 @@ app.post('/api/libros', (req, res) => {
   const { Titulo, AutorID, Genero, FechaPublicacion } = req.body;
   const query = 'INSERT INTO Libros (Titulo, AutorID, Genero, FechaPublicacion) VALUES (?, ?, ?, ?)';
   db.query(query, [Titulo, AutorID, Genero, FechaPublicacion], (err, results) => {
-    if (err) throw err;
+    if (err) throw err; 
     res.status(201).send({ id: results.insertId });
   });
 });
 
+// Ruta para actualizar un libro
 app.put('/api/libros/:id', (req, res) => {
   const { id } = req.params;
   const { Titulo, AutorID, Genero, FechaPublicacion } = req.body;
   const query = 'UPDATE Libros SET Titulo = ?, AutorID = ?, Genero = ?, FechaPublicacion = ? WHERE LibroID = ?';
-  db.query(query, [Titulo, AutorID, Genero, FechaPublicacion, id], err => {
-    if (err) throw err;
-    res.send('Book updated successfully.');
+
+  db.query(query, [Titulo, AutorID, Genero, FechaPublicacion, id], (err, result) => {
+    if (err) {
+      console.error("Error al actualizar el libro:", err);
+      res.status(500).send("Error interno del servidor");
+      return;
+    }
+    res.status(200).send("Libro actualizado correctamente");
+  });
+});
+
+// Ruta para obtener un libro por su ID (usada para editar)
+app.get('/api/libros/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'SELECT * FROM Libros WHERE LibroID = ?';
+
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error("Error al obtener el libro:", err);
+      res.status(500).send("Error interno del servidor");
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).send("Libro no encontrado");
+      return;
+    }
+    res.json(results[0]);
   });
 });
 
 
 app.delete('/api/libros/:id', (req, res) => {
   const { id } = req.params;
-  
-  // Eliminar registros relacionados en la tabla libroseditoriales
-  const deleteRelatedQuery = 'DELETE FROM libroseditoriales WHERE LibroID = ?';
-  db.query(deleteRelatedQuery, [id], (err, result) => {
+
+  // Primero eliminar registros relacionados en la tabla DetallePrestamos
+  const deleteDetallePrestamosQuery = 'DELETE FROM DetallePrestamos WHERE LibroID = ?';
+  db.query(deleteDetallePrestamosQuery, [id], (err, result) => {
     if (err) {
-      console.error('Error al eliminar registros relacionados:', err);
-      return res.status(500).send('Error al eliminar registros relacionados.');
+      console.error("Error al eliminar registros en DetallePrestamos:", err);
+      res.status(500).send("Error interno del servidor");
+      return;
     }
-    
-    // Luego eliminar el libro de la tabla Libros
-    const deleteBookQuery = 'DELETE FROM Libros WHERE LibroID = ?';
-    db.query(deleteBookQuery, [id], (err, result) => {
+
+    // Luego eliminar registros relacionados en la tabla LibrosEditoriales
+    const deleteLibrosEditorialesQuery = 'DELETE FROM LibrosEditoriales WHERE LibroID = ?';
+    db.query(deleteLibrosEditorialesQuery, [id], (err, result) => {
       if (err) {
-        console.error('Error al eliminar el libro:', err);
-        return res.status(500).send('Error al eliminar el libro.');
+        console.error("Error al eliminar registros en LibrosEditoriales:", err);
+        res.status(500).send("Error interno del servidor");
+        return;
       }
-      
-      res.send('Libro eliminado correctamente.');
+
+      // Luego eliminar registros relacionados en la tabla LibroCategorias
+      const deleteLibroCategoriasQuery = 'DELETE FROM LibroCategorias WHERE LibroID = ?';
+      db.query(deleteLibroCategoriasQuery, [id], (err, result) => {
+        if (err) {
+          console.error("Error al eliminar registros en LibroCategorias:", err);
+          res.status(500).send("Error interno del servidor");
+          return;
+        }
+
+        // Finalmente eliminar el libro en sí
+        const deleteLibroQuery = 'DELETE FROM Libros WHERE LibroID = ?';
+        db.query(deleteLibroQuery, [id], (err, result) => {
+          if (err) {
+            console.error("Error al eliminar el libro:", err);
+            res.status(500).send("Error interno del servidor");
+            return;
+          }
+
+          // Si se eliminó correctamente el libro
+          res.status(204).send(); // Envía una respuesta 204 (No Content)
+        });
+      });
     });
   });
 });
+
+
+
+
+
 
 /******************************************************** */
 
@@ -557,13 +609,5 @@ app.put('/api/prestamos/:id', (req, res) => {
     } else {
       res.status(200).send({ message: 'Prestamo updated successfully' });
     }
-  });
-});
-
-// Ruta para obtener todos los miembros
-app.get('/api/miembros', (req, res) => {
-  db.query('SELECT MiembroID, Nombre FROM Miembros', (err, results) => {
-    if (err) throw err;
-    res.send(results);
   });
 });
