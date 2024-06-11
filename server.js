@@ -239,9 +239,25 @@ app.delete('/api/loans/:id', (req, res) => {
 });
 
 
+/*---------------------------------------Reseñas---------------------- */
 // Endpoint para obtener los detalles de reseñas
 app.get('/api/reviews', (req, res) => {
-  const query = 'SELECT * FROM Reseñas';
+  const query = `
+    SELECT 
+        R.ReseñaID, 
+        L.Titulo AS TituloLibro, 
+        CONCAT(M.Nombre, ' ', M.Apellido) AS NombreMiembro, 
+        R.Calificación, 
+        R.Comentario, 
+        R.Fecha
+    FROM 
+        Reseñas R
+    JOIN 
+        Libros L ON R.LibroID = L.LibroID
+    JOIN 
+        Miembros M ON R.MiembroID = M.MiembroID
+    LIMIT 0, 25;
+  `;
   db.query(query, (err, results) => {
     if (err) {
       console.error('Error fetching reviews from the database:', err);
@@ -251,6 +267,7 @@ app.get('/api/reviews', (req, res) => {
     res.json(results);
   });
 });
+
 
 // Ruta para agregar una nueva reseña
 app.post('/api/reviews', (req, res) => {
